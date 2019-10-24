@@ -1,0 +1,19 @@
+﻿{
+  "bindings": [
+    {
+      "name": "input",
+      "type": "activityTrigger",
+      "direction": "in"
+    },
+    {
+      "type": "cosmosDB",
+      "name": "document",
+      "databaseName": "db",
+      "collectionName": "Items",
+      "createIfNotExists": false,
+      "connectionStringSetting": "DOCUMENTDB",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}
