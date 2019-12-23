@@ -4,13 +4,11 @@
     "EVENTHUB": "",
     "DOCUMENTDB": "",
     "STORAGE": "",
-    "APPINSIGHTS_INSTRUMENTATIONKEY": "",
-
-    "WEBSITE_SITE_NAME": "",
-    "WEBSITE_CONTENTSHARE": "",
-    "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "",
-
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-    "AzureWebJobsStorage": ""
-  }
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_EXTENSION_VERSION": "~2",
+    "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "",
+    "WEBSITE_CONTENTSHARE": ""
+  },
+  "ConnectionStrings": {}
 }
