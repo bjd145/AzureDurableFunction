@@ -71,16 +71,22 @@ az eventhubs eventhub create -g ${RG} --namespace-name ${eventHubNameSpace} -n $
 
 #Create Azure Storage
 az storage account create --name ${storageAccountName} --location $location --resource-group $RG --sku Standard_LRS
-storageKey=`az storage account keys list -n ${storageAccountName} --query '[0].value' -o tsv`
-storageConnectionString="DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${storageKey}"
-
-#Create Azur Functoin
-funcStorageName=${functionAppName}sa
 
 # Create an Azure Function with storage accouunt in the resource group.
 if ! `az functionapp show --name $functionAppName --resource-group $RG -o none`
 then
+    funcStorageName=${functionAppName}sa
     az storage account create --name $funcStorageName --location $location --resource-group $RG --sku Standard_LRS
     az functionapp create --name $functionAppName --storage-account $funcStorageName --consumption-plan-location $location --resource-group $RG
     az functionapp identity assign --name $functionAppName --resource-group $RG
 fi
+
+## Get Connection Strings
+cosmosConnectionString=`az cosmosdb list-connection-strings -n ${cosmosDBAccountName} -g ${RG} --query 'connectionStrings[0].connectionString' -o tsv` 
+ehConnectionString=`az eventhubs namespace authorization-rule keys list -g ${RG} --namespace-name ${eventHubNameSpace} --name RootManageSharedAccessKey -o tsv --query primaryConnectionString`
+storageKey=`az storage account keys list -n ${storageAccountName} --query '[0].value' -o tsv`
+storageConnectionString="DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${storageKey}"
+
+az functionapp config appsettings set -g $RG -n $functionAppName --settings STORAGE=${storageConnectionString}
+az functionapp config appsettings set -g $RG -n $functionAppName --settings EVENTHUB=${ehConnectionString}
+az functionapp config appsettings set -g $RG -n $functionAppName --settings DOCUMENTDB=${cosmosConnectionString}
