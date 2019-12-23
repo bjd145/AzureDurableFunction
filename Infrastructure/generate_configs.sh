@@ -45,7 +45,7 @@ az account set -s ${subscription}
 subId=`az account show -o tsv --query id`
 
 ## Get Cosmos Connection String
-cosmosConnectionString=`az cosmosdb list-connection-strings -n ${cosmosDBAccountName} -g DevSub01_CQRS_RG --query 'connectionStrings[0].connectionString' -o tsv`
+cosmosConnectionString=`az cosmosdb list-connection-strings -n ${cosmosDBAccountName} -g ${RG} --query 'connectionStrings[0].connectionString' -o tsv`
 
 ## Get Event Hub Connection String 
 ehConnectionString=`az eventhubs namespace authorization-rule keys list -g ${RG} --namespace-name ${eventHubNameSpace} --name RootManageSharedAccessKey -o tsv --query primaryConnectionString`
