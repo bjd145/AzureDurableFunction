@@ -1,11 +1,9 @@
-# AzureDurableFunction
+# Azure Durable Functions
 Quick and Dirty example of how to use Azure Durable Functions
 
-# Manual Deployment
+#  Deployment
 1. Clone repository
-2. Create an Azure Event Hub, Azure Storage Account and a Azure Cosmosdb Account.
-    * Copy connection scripts for each service and upate local.settings.json 
-    * Create event hub named - events001 - in the EventHub Namespace
-    * Create databbase named - db - with a container named items in Cosmos DB
-3. Update local.settings.json 
-4. func azure functionapp publishh <func name>
+2. .\Infrastructure\create_infrastructure.sh -g {Resource Group} -l {location} -s {Subscription Name}
+3. .\Infrastructure\generate_configs.sh -n {App Name} -g {Resource Group} -s {Subscription Name}
+4. func azure functoinapp fetch-app-settings <func name>
+5. func azure functionapp publish <func name>
