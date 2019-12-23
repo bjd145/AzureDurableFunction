@@ -1,0 +1,19 @@
+﻿{
+  "bindings": [
+    {
+      "type": "eventHubTrigger",
+      "name": "events",
+      "direction": "in",
+      "eventHubName": "events001",
+      "cardinality": "many",
+      "connection": "EVENTHUB",
+      "consumerGroup": "$Default"
+    },
+    {
+      "type": "orchestrationClient",
+      "name": "client",
+      "direction": "in"
+    }
+  ],
+  "disabled": false
+}
