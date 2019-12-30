@@ -8,7 +8,7 @@ public static async Task Run(
     var message = context.GetInput<string>(); 
     
     log.LogInformation($"Started Orchestrator: '{message}'.");
-    await context.CallActivityAsync<string>("bjdStorageFunc002", message);
-    await context.CallActivityAsync<string>("bjdCosmosFunc001", message );
+    await context.CallActivityAsync<string>("StorageOutput", message);
+    await context.CallActivityAsync<string>("CosmosOutput", message );
 
 }
